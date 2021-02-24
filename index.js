@@ -73,7 +73,7 @@ app.post('/api/user/login', (req, res) => {
               // 토큰을 저장해야하는데 어디에 저장할지 정하기
               // (쿠키 or 로컬스토리지)
               // 이번에는 쿠키에 저장
-              res.cookie('x-auth', userInfo.token).status(200).json({
+              res.cookie('x_auth', userInfo.token).status(200).json({
                 loginSuccess: true,
                 userId: userInfo._id,
               });
@@ -99,6 +99,16 @@ app.get('/api/user/auth', auth, (req, res) => {
     lastname: req.user.lastname,
     role: req.user.role,
     image: req.user.image,
+  });
+});
+
+app.get('/api/user/logout', auth, (req, res) => {
+  // console.log('req.user', req.user)
+  User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err, user) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).send({
+      success: true,
+    });
   });
 });
 
