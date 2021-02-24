@@ -5,6 +5,7 @@ const bodyparser = require('body-parser');
 const { User } = require('./models/User');
 const config = require('./config/key');
 const cookieParser = require('cookie-parser');
+const { auth } = require('./middleware/auth');
 
 // application /x-www-form-urlencoded 이렇게 생긴 데이터를 가져올수 있게 하는 것
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -33,7 +34,7 @@ app.get('/', (req, res) => {
 });
 
 // 39~45 회원가입을 위한 route
-app.post('/register', (req, res) => {
+app.post('/api/user/register', (req, res) => {
   // 회원가입할 때 필요한 정보들을 client에서 받아오면
   // 정보를 데이터베이스에 넣는다
 
@@ -45,8 +46,8 @@ app.post('/register', (req, res) => {
   });
 });
 
-// 로그인을 위한 route
-app.post('/login', (req, res) => {
+// 49~85 로그인을 위한 route
+app.post('/api/user/login', (req, res) => {
   // 요청된 이메일을 db에서 찾기
   User.findOne({ email: req.body.email }, (err, userInfo) => {
     if (!userInfo) {
@@ -81,6 +82,23 @@ app.post('/login', (req, res) => {
         }
       });
     }
+  });
+});
+
+// 88~103 인증 확인을 위한 route + auth.js
+app.get('/api/user/auth', auth, (req, res) => {
+  // 여기까지 미들웨어(auth)를 통과해 왔다는건
+  // 인증이 통과되었다는 것
+
+  res.status(200).json({
+    _id: req.user_id,
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
+    email: req.user.email,
+    name: req.user.name,
+    lastname: req.user.lastname,
+    role: req.user.role,
+    image: req.user.image,
   });
 });
 
