@@ -3,6 +3,7 @@ const app = express();
 const port = 5000;
 const bodyparser = require('body-parser');
 const { User } = require('./models/User');
+const config = require('./config/key');
 
 // application /x-www-form-urlencoded 이렇게 생긴 데이터를 가져올수 있게 하는 것
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -11,15 +12,12 @@ app.use(bodyparser.json());
 
 const mongoose = require('mongoose');
 mongoose
-  .connect(
-    'mongodb+srv://YoojinHwang:elwufk12@thefirstyoojindb.edswc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
-  )
+  .connect(config.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(() => {
     console.log('MONGO GOOD');
   })
