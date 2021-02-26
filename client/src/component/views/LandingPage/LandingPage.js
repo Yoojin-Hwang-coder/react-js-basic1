@@ -1,7 +1,20 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 
 function LandingPage() {
-  return <div>sfsdf</div>;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100vh',
+      }}
+    >
+      <h2>시작페이지</h2>
+    </div>
+  );
 }
 
 export default LandingPage;
