@@ -6,6 +6,7 @@ function LandingPage(props) {
   const onClickhandler = () => {
     axios.get('/api/user/logout').then((response) => {
       if (response.data.success) {
+        window.localStorage.removeItem('userId');
         props.history.push('/login');
       } else {
         alert('failed to logout');
