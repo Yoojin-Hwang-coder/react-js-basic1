@@ -59,7 +59,7 @@ router.post('/login', (req, res) => {
           });
         } // 비밀번호가 맞다면 토큰 생성하기
         else {
-          userInfo.makeToken((err, userInfo) => {
+          userInfo.generateToken((err, userInfo) => {
             if (err) {
               return res.status(400).send(err);
             } else {
