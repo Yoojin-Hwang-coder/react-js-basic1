@@ -69,7 +69,7 @@ userSchema.methods.comparePassword = function (plainPassword, cb) {
 };
 
 // 토큰을 생성하는 mothod
-userSchema.methods.makeToken = function (cb) {
+userSchema.methods.generateToken = function (cb) {
   let user = this;
   // jwt를 이용해 token생성하기
   let token = jwt.sign(user._id.toHexString(), 'secretToken');
