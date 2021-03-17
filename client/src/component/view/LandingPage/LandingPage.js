@@ -14,7 +14,7 @@ function LandingPage(props) {
         flexDirection: 'column',
       }}
     >
-      <h2>시작페이지</h2>
+      <h2>LandingPage</h2>
     </div>
   );
 }
