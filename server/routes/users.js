@@ -66,7 +66,7 @@ router.post('/login', (req, res) => {
               // 토큰을 저장해야하는데 어디에 저장할지 정하기
               // (쿠키 or 로컬스토리지)
               // 이번에는 쿠키에 저장
-              res.cookie('x_authExp', user.tokenExp);
+              res.cookie('x_authExp', userInfo.tokenExp);
               res.cookie('x_auth', userInfo.token).status(200).json({
                 loginSuccess: true,
                 userId: userInfo._id,
