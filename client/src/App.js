@@ -8,6 +8,7 @@ import Auth from './HOC/auth';
 function App() {
   return (
     <Router>
+      <Navbar />
       <div>
         <Switch>
           <Route exact path='/' component={Auth(LandingPage, null)} />
