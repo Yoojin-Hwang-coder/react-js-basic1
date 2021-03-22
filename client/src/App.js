@@ -4,6 +4,7 @@ import LoginPage from './component/view/LoginPage/LoginPage';
 import RegisterPage from './component/view/RegisterPage/RegisterPage';
 import './App.css';
 import Auth from './HOC/auth';
+import Navbar from './component/view/Navbar/Navbar';
 
 function App() {
   return (
